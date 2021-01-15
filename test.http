@@ -7,3 +7,15 @@ Content-Type: "application/json"
     "toggle": "on",
     "meetingId": "jehollan-1523"
 }
+
+### Exit
+
+POST http://localhost:7071/api/Start
+Content-Type: "application/json"
+
+{
+    "roomId": "JeffHomeOffice",
+    "event": "Exit",
+    "toggle": "off",
+    "meetingId": "jehollan-1523"
+}

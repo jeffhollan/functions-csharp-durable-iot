@@ -2,8 +2,8 @@ POST http://localhost:7071/api/Start
 Content-Type: "application/json"
 
 {
-    "roomId": "41_1423",
-    "event": "Exit",
-    "toggle": "off",
+    "roomId": "JeffHomeOffice",
+    "event": "Enter",
+    "toggle": "on",
     "meetingId": "jehollan-1523"
 }

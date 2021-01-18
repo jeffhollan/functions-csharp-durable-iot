@@ -55,7 +55,7 @@ namespace Hollan.Function
         public static DeviceIds GetDevices(
             [ActivityTrigger] string req, 
             [CosmosDB("devices", "rooms", ConnectionStringSetting = "CosmosDbConnectionString", Id = "{req}", PartitionKey = "{req}")] DeviceIds devices,
-            ILogger log)
+            ILogger log)cd
         {
             log.LogInformation($"Getting devices for room {req}");
             return devices;

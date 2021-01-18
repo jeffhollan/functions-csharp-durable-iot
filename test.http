@@ -1,3 +1,4 @@
+### Enter (local)
 POST http://localhost:7071/api/Start
 Content-Type: "application/json"
 
@@ -8,9 +9,31 @@ Content-Type: "application/json"
     "meetingId": "jehollan-1523"
 }
 
-### Exit
+### Exit (local)
 
 POST http://localhost:7071/api/Start
+Content-Type: "application/json"
+
+{
+    "roomId": "JeffHomeOffice",
+    "event": "Exit",
+    "toggle": "off",
+    "meetingId": "jehollan-1523"
+}
+
+### Enter (cloud)
+POST https://jehollan-durable-iot.azurewebsites.net/api/Start
+Content-Type: "application/json"
+
+{
+    "roomId": "JeffHomeOffice",
+    "event": "Enter",
+    "toggle": "on",
+    "meetingId": "jehollan-1523"
+}
+
+### Exit (cloud)
+POST https://jehollan-durable-iot.azurewebsites.net/api/Start
 Content-Type: "application/json"
 
 {

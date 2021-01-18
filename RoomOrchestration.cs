@@ -55,26 +55,22 @@ namespace Hollan.Function
         public static DeviceIds GetDevices(
             [ActivityTrigger] string req, 
             [CosmosDB("devices", "rooms", ConnectionStringSetting = "CosmosDbConnectionString", Id = "{req}", PartitionKey = "{req}")] DeviceIds devices,
-            ILogger log)cd
+            ILogger log)
         {
             log.LogInformation($"Getting devices for room {req}");
             return devices;
         }
 
         [FunctionName("Start")]
-        public static async Task<IActionResult> HttpStart(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+        public static async Task QueueStart(
+            [QueueTrigger("queue")] RoomRequest roomRequest,
             [DurableClient] IDurableClient starter,
             ILogger log)
         {
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(requestBody);
-            // Function input comes from the request content.
-            string instanceId = await starter.StartNewAsync("RoomOrchestration", null, data);
+            
+            string instanceId = await starter.StartNewAsync("RoomOrchestration", null, roomRequest);
 
             log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
-
-            return starter.CreateCheckStatusResponse(req, instanceId);
         }
     }
 }
